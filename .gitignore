@@ -1,0 +1,7 @@
+.vscode
+_*
+*json
+token
+
+.venv
+.mypy*
