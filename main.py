@@ -214,12 +214,12 @@ def get_hotspot_detail(headers: dict, params: dict, project, data, base_domain: 
                     
                     detail_data = get_detail(url_detail, headers, params_details)
 
-                    print(f'detail_data: {detail_data["key"]}')
+                    print(f'detail_data: {detail_data["rule"]["key"]}')
                     print("==========")
 
-                    master_hotspot[hotspot["ruleKey"]] = detail_data
+                    master_hotspot[hotspot["ruleKey"]] = detail_data["rule"]
 
-                    print(f'master_hotspot: {detail_data["key"]}')
+                    print(f'master_hotspot: {detail_data["rule"]["key"]}')
                     print("==========")
 
                     hotspot["rule"]= detail_data["rule"]

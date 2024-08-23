@@ -40,9 +40,9 @@ def insert_to_doc(data, doc, iteration, target):
     shading_elm = parse_xml(r'<w:shd {} w:fill="{}"/>'.format(nsdecls('w'), "C8C8C8"))
     try:
         if "line" in data:
-            class_name= data["component"].split("/")[-1] + " baris ke " + str(data["line"])
+            class_name= data["component"] + " baris ke " + str(data["line"])
         else:
-            class_name= data["component"].split("/")[-1]
+            class_name= data["component"]
             
         # Convert the data to a formatted string and add to the document
         add_header(class_name, doc, 4)
@@ -114,7 +114,21 @@ def insert_to_doc(data, doc, iteration, target):
         
         try:
             table.rows[7].cells[0].text = "Detail"
-            insert_detail(table.rows[7].cells[1], data["ruleKey"])
+            if "flows" in data and len(data["flows"]) > 0:
+                i = 0
+                for flow in data["flows"]:
+                    msg = data["flows"][i]["locations"][0]["msg"]
+                    startLine = data["flows"][i]["locations"][0]["textRange"]["startLine"]
+                    endLine = data["flows"][i]["locations"][0]["textRange"]["endLine"]
+                    if (startLine == endLine):
+                        str_detail = f'{msg} (baris {startLine})'
+                    else:
+                        str_detail = f'{msg} (baris {startLine} - {endLine})'
+                    insert_detail(table.rows[7].cells[1], str_detail)
+                    i+=1
+            # else:
+            #     class_name= data["component"]
+            # insert_detail(table.rows[7].cells[1], data["rule"]["htmlDesc"])
             # table.rows[7].cells[0]._element.get_or_add_tcPr().append(shading_elm)
         except Exception as err:
             print(f'Error adding Detail: {err}')
