@@ -144,9 +144,10 @@ def main():
                 for hotspot in hotspots:
                     # print(f'{hotspots.index(hotspot) + 1} : {hotspot["securityCategory"]}')
                     type = hotspot["securityCategory"]
-                    if (type not in data):
-                        data[type] = []
-                    data[type].append(hotspot)
+                    if (type == "sql-injection"):
+                        if (type not in data):
+                            data[type] = []
+                        data[type].append(hotspot)
 
             end = time.time()
             print("Elapsed time before get detail: " + str(end-start))
