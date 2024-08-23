@@ -237,7 +237,7 @@ def get_hotspot_detail(headers: dict, params: dict, project, data, base_domain: 
 
     # doc.save(report_dir + "All Issue "+project+".docx")
     doc1.add_page_break()
-    merge_and_save_docx(doc1, doc2, report_dir + "All Issue "+project+".docx")
+    merge_and_save_docx(doc1, doc2, report_dir + "SQL Injection "+project+".docx")
     if not load_from_file :
         write_json_file(data, raw_data_dir + "All Hotspot "+project+".json")
         write_json_file(master_hotspot, master_data_dir + "Master Hotspot.json")
